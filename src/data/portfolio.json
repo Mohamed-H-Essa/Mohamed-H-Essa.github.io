@@ -1,0 +1,226 @@
+{
+  "personal": {
+    "name": "Alex Chen",
+    "role": "Flutter Developer - AWS/DevOps",
+    "tagline": "Building scalable mobile solutions with clean architecture and cloud-native approaches",
+    "bio": "Passionate Flutter developer with expertise in Clean Architecture, BLoC/Cubit state management, and cloud-native solutions. I specialize in building scalable mobile applications using Firebase, AWS services, and modern DevOps practices on Linux environments.",
+    "location": "San Francisco, CA",
+    "email": "alex.chen@example.com",
+    "phone": "+1 (555) 123-4567",
+    "social": {
+      "github": "https://github.com/alexchen",
+      "linkedin": "https://linkedin.com/in/alexchen",
+      "twitter": "https://twitter.com/alexchen"
+    },
+    "stats": {
+      "yearsExperience": 5,
+      "projectsCompleted": 42,
+      "clientsSatisfied": 25
+    }
+  },
+  "skills": {
+    "Frontend": [
+      { "name": "Flutter", "level": 95 },
+      { "name": "Dart", "level": 95 },
+      { "name": "React", "level": 85 },
+      { "name": "TypeScript", "level": 80 }
+    ],
+    "Backend": [
+      { "name": "Node.js", "level": 85 },
+      { "name": "NestJS", "level": 80 },
+      { "name": "Python", "level": 75 },
+      { "name": "Go", "level": 70 }
+    ],
+    "Cloud": [
+      { "name": "AWS", "level": 90 },
+      { "name": "Firebase", "level": 95 },
+      { "name": "Google Cloud", "level": 75 },
+      { "name": "Docker", "level": 85 }
+    ],
+    "Databases": [
+      { "name": "Firestore", "level": 90 },
+      { "name": "PostgreSQL", "level": 85 },
+      { "name": "MongoDB", "level": 80 },
+      { "name": "Redis", "level": 75 }
+    ],
+    "DevOps": [
+      { "name": "CI/CD", "level": 85 },
+      { "name": "Linux", "level": 90 },
+      { "name": "Kubernetes", "level": 75 },
+      { "name": "Terraform", "level": 70 }
+    ],
+    "Tools": [
+      { "name": "Git", "level": 95 },
+      { "name": "VS Code", "level": 90 },
+      { "name": "Android Studio", "level": 85 },
+      { "name": "Figma", "level": 75 }
+    ]
+  },
+  "timeline": [
+    {
+      "id": 1,
+      "title": "Senior Flutter Developer",
+      "company": "TechFlow Solutions",
+      "period": "2022 - Present",
+      "type": "work",
+      "achievements": [
+        "Led development of 3 major Flutter applications serving 100K+ users",
+        "Implemented Clean Architecture with BLoC pattern, reducing bugs by 40%",
+        "Migrated legacy apps to Firebase & AWS, improving performance by 60%",
+        "Mentored junior developers and established Flutter best practices"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Mobile Developer",
+      "company": "StartupHub Inc",
+      "period": "2020 - 2022",
+      "type": "work",
+      "achievements": [
+        "Built Flutter MVP that secured $2M Series A funding",
+        "Integrated complex payment systems and real-time features",
+        "Implemented automated testing, achieving 90% code coverage",
+        "Collaborated with design team to create pixel-perfect UIs"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Full Stack Developer",
+      "company": "Digital Innovations",
+      "period": "2019 - 2020",
+      "type": "work",
+      "achievements": [
+        "Developed REST APIs and microservices using Node.js",
+        "Created responsive web applications with React",
+        "Managed AWS infrastructure and deployed scalable solutions",
+        "Participated in agile development and code reviews"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "FinanceFlow Mobile App",
+      "description": "A comprehensive personal finance management app with real-time analytics and AI-powered insights.",
+      "image": "https://images.pexels.com/photos/3760790/pexels-photo-3760790.jpeg",
+      "tags": ["Flutter", "Firebase", "BLoC", "AI/ML"],
+      "role": "Lead Developer",
+      "featured": true,
+      "metrics": {
+        "users": "50K+",
+        "rating": "4.8/5",
+        "performance": "95% crash-free"
+      },
+      "tech": ["Flutter", "Dart", "Firebase", "BLoC", "Clean Architecture"],
+      "links": {
+        "demo": "https://demo.financeflow.app",
+        "github": "https://github.com/alexchen/financeflow",
+        "case_study": "https://portfolio.com/case-study/financeflow"
+      },
+      "details": "Built with Clean Architecture and BLoC pattern, featuring real-time data synchronization, offline support, and advanced security measures."
+    },
+    {
+      "id": 2,
+      "title": "EcoTracker Sustainability Platform",
+      "description": "Mobile platform helping users track their carbon footprint with gamification and community features.",
+      "image": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
+      "tags": ["Flutter", "AWS", "GraphQL", "Gamification"],
+      "role": "Flutter Developer",
+      "featured": true,
+      "metrics": {
+        "users": "25K+",
+        "engagement": "85% MAU",
+        "impact": "1M tons CO2 tracked"
+      },
+      "tech": ["Flutter", "AWS Amplify", "GraphQL", "Lambda", "DynamoDB"],
+      "links": {
+        "demo": "https://demo.ecotracker.app",
+        "github": "https://github.com/alexchen/ecotracker"
+      },
+      "details": "Serverless architecture with real-time data processing and social features for environmental impact tracking."
+    },
+    {
+      "id": 3,
+      "title": "MediConnect Telemedicine",
+      "description": "HIPAA-compliant telemedicine platform connecting patients with healthcare providers.",
+      "image": "https://images.pexels.com/photos/4386466/pexels-photo-4386466.jpeg",
+      "tags": ["Flutter", "WebRTC", "Firebase", "HIPAA"],
+      "role": "Senior Developer",
+      "featured": true,
+      "metrics": {
+        "consultations": "10K+",
+        "uptime": "99.9%",
+        "satisfaction": "4.9/5"
+      },
+      "tech": ["Flutter", "WebRTC", "Firebase", "Cloud Functions", "Stripe"],
+      "links": {
+        "case_study": "https://portfolio.com/case-study/mediconnect"
+      },
+      "details": "End-to-end encrypted video consultations with integrated payment processing and patient management."
+    },
+    {
+      "id": 4,
+      "title": "SmartHome IoT Dashboard",
+      "description": "Flutter app for managing IoT devices with real-time monitoring and automation.",
+      "image": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
+      "tags": ["Flutter", "IoT", "MQTT", "Real-time"],
+      "role": "Full Stack Developer",
+      "featured": false,
+      "tech": ["Flutter", "MQTT", "Node.js", "InfluxDB", "Grafana"],
+      "links": {
+        "github": "https://github.com/alexchen/smarthome"
+      },
+      "details": "Real-time IoT device management with custom protocol implementation and data visualization."
+    },
+    {
+      "id": 5,
+      "title": "EventSync Conference App",
+      "description": "Event management platform with networking features and live streaming capabilities.",
+      "image": "https://images.pexels.com/photos/2774556/pexels-photo-2774556.jpeg",
+      "tags": ["Flutter", "Live Streaming", "Networking", "Events"],
+      "role": "Mobile Developer",
+      "featured": false,
+      "tech": ["Flutter", "Agora SDK", "Firebase", "Push Notifications"],
+      "links": {
+        "demo": "https://demo.eventsync.app"
+      },
+      "details": "Multi-platform event management with live streaming and attendee networking features."
+    },
+    {
+      "id": 6,
+      "title": "CryptoPortfolio Tracker",
+      "description": "Cryptocurrency portfolio management with real-time data and advanced analytics.",
+      "image": "https://images.pexels.com/photos/844127/pexels-photo-844127.jpeg",
+      "tags": ["Flutter", "Crypto", "Analytics", "Real-time"],
+      "role": "Lead Developer",
+      "featured": false,
+      "tech": ["Flutter", "WebSocket", "Chart Libraries", "REST APIs"],
+      "links": {
+        "github": "https://github.com/alexchen/cryptoportfolio"
+      },
+      "details": "Real-time cryptocurrency tracking with advanced charting and portfolio analytics."
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What's your availability for new projects?",
+      "answer": "I'm currently accepting new projects with a 2-3 week lead time. I prefer working on 2-3 month engagements for optimal results."
+    },
+    {
+      "question": "What are your rates?",
+      "answer": "My rates vary based on project complexity and duration. For Flutter development, I typically charge $100-150/hour or fixed project rates. Contact me for a detailed quote."
+    },
+    {
+      "question": "Do you work with design teams?",
+      "answer": "Absolutely! I collaborate closely with design teams and can work from Figma designs, style guides, or help create the design system from scratch."
+    },
+    {
+      "question": "What's your development process?",
+      "answer": "I follow agile methodologies with regular sprints, code reviews, and testing. I use Clean Architecture, maintain 90%+ code coverage, and ensure CI/CD pipeline setup."
+    },
+    {
+      "question": "Do you provide ongoing support?",
+      "answer": "Yes, I offer maintenance packages and long-term support agreements. This includes bug fixes, feature updates, and performance monitoring."
+    }
+  ]
+}
