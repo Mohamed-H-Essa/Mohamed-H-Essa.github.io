@@ -54,7 +54,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <ToastContainer toasts={toasts} onClose={removeToast} />
 
       {/* Privacy Notice */}
-      <div className="fixed bottom-4 left-4 max-w-sm">
+      {/* <div className="fixed bottom-4 left-4 max-w-sm">
         <div className="bg-gray-800 text-white p-4 rounded-lg shadow-lg text-sm">
           <p className="mb-2">
             This site uses privacy-friendly analytics to improve user experience.
@@ -63,7 +63,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             Privacy Policy
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

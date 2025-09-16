@@ -82,7 +82,7 @@ const About: React.FC<AboutProps> = ({ data }) => {
                     <div className="text-2xl font-bold text-gray-900">
                       {data.stats.projectsCompleted}+
                     </div>
-                    <div className="text-sm text-gray-600">Projects</div>
+                    <div className="text-sm text-gray-600">Apps</div>
                   </div>
                 </div>
               </div>

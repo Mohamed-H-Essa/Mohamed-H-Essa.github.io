@@ -1,41 +1,39 @@
 {
   "personal": {
-    "name": "Alex Chen",
+    "name": "Mohamed Essa",
     "role": "Flutter Developer - AWS/DevOps",
     "tagline": "Building scalable mobile solutions with clean architecture and cloud-native approaches",
     "bio": "Passionate Flutter developer with expertise in Clean Architecture, BLoC/Cubit state management, and cloud-native solutions. I specialize in building scalable mobile applications using Firebase, AWS services, and modern DevOps practices on Linux environments.",
-    "location": "San Francisco, CA",
-    "email": "alex.chen@example.com",
-    "phone": "+1 (555) 123-4567",
+    "location": "Cairo, Egypt",
+    "email": "me@mecodes.live",
+    "phone": "+20 102 153 7037",
     "social": {
-      "github": "https://github.com/alexchen",
-      "linkedin": "https://linkedin.com/in/alexchen",
-      "twitter": "https://twitter.com/alexchen"
+      "github": "https://github.com/Mohamed-H-Essa",
+      "linkedin": "https://www.linkedin.com/in/mohamed-h-essa-a145ba1b0/",
+      "twitter": "https://x.com/MHosnyDev"
     },
     "stats": {
-      "yearsExperience": 5,
-      "projectsCompleted": 42,
-      "clientsSatisfied": 25
+      "yearsExperience": 2,
+      "projectsCompleted": 6,
+      "clientsSatisfied": 12
     }
   },
   "skills": {
     "Frontend": [
       { "name": "Flutter", "level": 95 },
       { "name": "Dart", "level": 95 },
-      { "name": "React", "level": 85 },
+      { "name": "React", "level": 50 },
       { "name": "TypeScript", "level": 80 }
     ],
     "Backend": [
       { "name": "Node.js", "level": 85 },
-      { "name": "NestJS", "level": 80 },
-      { "name": "Python", "level": 75 },
-      { "name": "Go", "level": 70 }
+      { "name": "NestJS", "level": 80 }
     ],
     "Cloud": [
-      { "name": "AWS", "level": 90 },
-      { "name": "Firebase", "level": 95 },
-      { "name": "Google Cloud", "level": 75 },
-      { "name": "Docker", "level": 85 }
+      { "name": "Docker", "level": 90 },
+      { "name": "Firebase", "level": 90 },
+      { "name": "AWS", "level": 65 },
+      { "name": "Google Cloud", "level": 50 }
     ],
     "Databases": [
       { "name": "Firestore", "level": 90 },
@@ -46,12 +44,13 @@
     "DevOps": [
       { "name": "CI/CD", "level": 85 },
       { "name": "Linux", "level": 90 },
-      { "name": "Kubernetes", "level": 75 },
-      { "name": "Terraform", "level": 70 }
+      { "name": "Kubernetes", "level": 30 },
+      { "name": "Terraform", "level": 30 }
     ],
     "Tools": [
       { "name": "Git", "level": 95 },
       { "name": "VS Code", "level": 90 },
+      { "name": "VIM", "level": 90 },
       { "name": "Android Studio", "level": 85 },
       { "name": "Figma", "level": 75 }
     ]
@@ -59,8 +58,8 @@
   "timeline": [
     {
       "id": 1,
-      "title": "Senior Flutter Developer",
-      "company": "TechFlow Solutions",
+      "title": "Flutter Developer",
+      "company": "Intrazero",
       "period": "2022 - Present",
       "type": "work",
       "achievements": [
