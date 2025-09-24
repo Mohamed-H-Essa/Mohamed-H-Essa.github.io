@@ -15,12 +15,12 @@ interface ContactProps {
   data: PersonalInfo;
 }
 
-const contactSchema = yup.object({
+const contactSchema = yup.object().shape({
   name: yup.string().required('Name is required').min(2, 'Name must be at least 2 characters'),
   email: yup.string().required('Email is required').email('Please enter a valid email'),
   subject: yup.string().required('Subject is required').min(5, 'Subject must be at least 5 characters'),
   message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters'),
-  honeypot: yup.string().max(0, 'Bot detected'), // Spam protection
+  honeypot: yup.string().notRequired().max(0, 'Bot detected'), // Spam protection - optional
 });
 
 const Contact: React.FC<ContactProps> = ({ data }) => {
@@ -39,7 +39,7 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
     reset,
     formState: { errors },
   } = useForm<ContactForm>({
-    resolver: yupResolver(contactSchema),
+    resolver: yupResolver(contactSchema) as any,
   });
 
   const copyEmail = async () => {
