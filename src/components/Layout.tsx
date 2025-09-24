@@ -27,10 +27,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white overflow-x-hidden">
       <Navigation />
       
-      <main>
+      <main className="overflow-x-hidden">
         {children}
       </main>
 

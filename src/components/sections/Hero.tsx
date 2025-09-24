@@ -35,20 +35,35 @@ const TypewriterText: React.FC<{ text: string; delay?: number }> = ({
 };
 
 const ParticleBackground: React.FC = () => {
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    const updateDimensions = () => {
+      setDimensions({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+    };
+
+    updateDimensions();
+    window.addEventListener('resize', updateDimensions);
+    return () => window.removeEventListener('resize', updateDimensions);
+  }, []);
+
   return (
     <div className="absolute inset-0 overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 opacity-90" />
-      {[...Array(50)].map((_, i) => (
+      {dimensions.width > 0 && [...Array(50)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1 h-1 bg-white rounded-full opacity-60"
           initial={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+            x: Math.random() * (dimensions.width - 20) + 10,
+            y: Math.random() * (dimensions.height - 20) + 10,
           }}
           animate={{
-            x: Math.random() * window.innerWidth,
-            y: Math.random() * window.innerHeight,
+            x: Math.random() * (dimensions.width - 20) + 10,
+            y: Math.random() * (dimensions.height - 20) + 10,
           }}
           transition={{
             duration: Math.random() * 20 + 10,
@@ -73,10 +88,10 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
   }, [skills.length]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden w-full">
       <ParticleBackground />
       
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           variants={staggerContainer}
           initial="hidden"
@@ -85,17 +100,17 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
         >
           {/* Name and Role */}
           <motion.div variants={fadeInUp} className="space-y-4">
-            <h1 className="text-5xl md:text-7xl font-bold text-white">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-tight">
               {data.name}
             </h1>
-            <div className="text-xl md:text-2xl text-blue-200 font-medium">
+            <div className="text-lg sm:text-xl md:text-2xl text-blue-200 font-medium">
               <TypewriterText text={data.role} />
             </div>
           </motion.div>
 
           {/* Dynamic Skills */}
           <motion.div variants={fadeInUp} className="h-16 flex items-center justify-center">
-            <div className="text-lg md:text-xl text-gray-300">
+            <div className="text-base sm:text-lg md:text-xl text-gray-300 px-4">
               Specializing in{' '}
               <motion.span
                 key={currentSkillIndex}
@@ -112,7 +127,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           {/* Tagline */}
           <motion.p
             variants={fadeInUp}
-            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+            className="text-base sm:text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4"
           >
             {data.tagline}
           </motion.p>
@@ -120,25 +135,25 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
           {/* Stats */}
           <motion.div
             variants={fadeInUp}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 max-w-2xl mx-auto px-4"
           >
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                 {data.stats.yearsExperience}+
               </div>
-              <div className="text-blue-200">Years Experience</div>
+              <div className="text-sm sm:text-base text-blue-200">Years Experience</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                 {data.stats.projectsCompleted}+
               </div>
-              <div className="text-blue-200">Projects Completed</div>
+              <div className="text-sm sm:text-base text-blue-200">Projects Completed</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-white">
+              <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-white">
                 {data.stats.clientsSatisfied}+
               </div>
-              <div className="text-blue-200">Satisfied Clients</div>
+              <div className="text-sm sm:text-base text-blue-200">Satisfied Clients</div>
             </div>
           </motion.div>
 
