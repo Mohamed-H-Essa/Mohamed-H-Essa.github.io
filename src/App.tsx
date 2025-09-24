@@ -11,12 +11,13 @@ import WorkTogether from './components/sections/WorkTogether';
 import Contact from './components/sections/Contact';
 import { ToastProvider } from './hooks/useToast';
 import portfolioData from './data/portfolio.json';
+import { TimelineItem } from './types/portfolio';
 import './index.css';
 
 function App() {
   return (
     <ToastProvider>
-      <Layout>
+      <Layout logoUrl={portfolioData.personal.logo}>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -25,7 +26,7 @@ function App() {
           <Hero data={portfolioData.personal} />
           <About data={portfolioData.personal} />
           <Projects data={portfolioData.projects} />
-          <Timeline data={portfolioData.timeline} />
+          <Timeline data={portfolioData.timeline as TimelineItem[]} />
           <Skills data={portfolioData.skills} />
           <FeaturedProjects data={portfolioData.projects} />
           <WorkTogether faqs={portfolioData.faqs} />

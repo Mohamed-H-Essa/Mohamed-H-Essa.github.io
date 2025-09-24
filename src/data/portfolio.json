@@ -2,6 +2,7 @@
   "personal": {
     "name": "Mohamed Essa",
     "role": "Flutter Developer - AWS/DevOps",
+    "logo": "/me_logo.png",
     "tagline": "Building scalable mobile solutions with clean architecture and cloud-native approaches",
     "bio": "Passionate Flutter developer with expertise in Clean Architecture, BLoC/Cubit state management, and cloud-native solutions. I specialize in building scalable mobile applications using Firebase, AWS services, and modern DevOps practices on Linux environments.",
     "location": "Cairo, Egypt",
@@ -99,9 +100,9 @@
   "projects": [
     {
       "id": 1,
-      "title": "FinanceFlow Mobile App",
-      "description": "A comprehensive personal finance management app with real-time analytics and AI-powered insights.",
-      "image": "https://images.pexels.com/photos/3760790/pexels-photo-3760790.jpeg",
+      "title": "Heaven Flowers",
+      "description": "An app for Flowers retail in Saudi Arabia.",
+      "image": "/projects/project_flowers_banner.png",
       "tags": ["Flutter", "Firebase", "BLoC", "AI/ML"],
       "role": "Lead Developer",
       "featured": true,

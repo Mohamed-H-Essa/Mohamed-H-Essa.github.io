@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 
-const Navigation: React.FC = () => {
+interface NavigationProps {
+  logoUrl?: string;
+}
+
+const Navigation: React.FC<NavigationProps> = ({ logoUrl }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -48,13 +52,21 @@ const Navigation: React.FC = () => {
           {/* Logo */}
           <motion.button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className={`text-xl font-bold transition-colors ${
+            className={`flex items-center transition-colors ${
               isScrolled ? 'text-gray-900' : 'text-white'
             }`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            ME
+            {logoUrl ? (
+              <img 
+                src={logoUrl} 
+                alt="Logo" 
+                className="h-8 w-auto"
+              />
+            ) : (
+              <span className="text-xl font-bold">ME</span>
+            )}
           </motion.button>
 
           {/* Desktop Navigation */}

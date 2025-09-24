@@ -1,6 +1,7 @@
 export interface PersonalInfo {
   name: string;
   role: string;
+  logo: string;
   tagline: string;
   bio: string;
   location: string;

@@ -7,9 +7,10 @@ import { useToast } from '../hooks/useToast';
 
 interface LayoutProps {
   children: React.ReactNode;
+  logoUrl?: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout: React.FC<LayoutProps> = ({ children, logoUrl }) => {
   const { toasts, removeToast } = useToast();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -28,7 +29,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
-      <Navigation />
+      <Navigation logoUrl={logoUrl} />
       
       <main className="overflow-x-hidden">
         {children}
