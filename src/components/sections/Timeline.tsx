@@ -9,72 +9,127 @@ interface TimelineProps {
   data: TimelineItemType[];
 }
 
-const TimelineItem: React.FC<{ item: TimelineItemType; index: number }> = ({ item, index }) => {
+const TimelineItem: React.FC<{ item: TimelineItemType; index: number; isLast: boolean }> = ({ item, index, isLast }) => {
   const { ref, inView } = useInView({
     threshold: 0.1,
     triggerOnce: true,
   });
 
-  const isEven = index % 2 === 0;
-
   return (
-    <div ref={ref} className="relative">
-      {/* Timeline Line */}
-      <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gray-200" />
+    <div ref={ref} className="relative pb-8 last:pb-0">
+      {/* Timeline Line - Only show if not last item */}
+      {!isLast && (
+        <div className="absolute left-6 md:left-1/2 md:transform md:-translate-x-1/2 top-12 w-0.5 h-full bg-gray-300" />
+      )}
       
-      {/* Timeline Node */}
-      <motion.div
-        variants={timelineItem}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        className="absolute left-1/2 transform -translate-x-1/2 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center shadow-lg z-10"
-      >
-        <Briefcase className="w-6 h-6 text-white" />
-      </motion.div>
+      {/* Mobile Layout */}
+      <div className="md:hidden flex items-start gap-4">
+        {/* Timeline Node */}
+        <motion.div
+          variants={timelineItem}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="flex-shrink-0 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center shadow-lg z-10"
+        >
+          <Briefcase className="w-6 h-6 text-white" />
+        </motion.div>
 
-      {/* Content */}
-      <motion.div
-        variants={timelineItem}
-        initial="hidden"
-        animate={inView ? "visible" : "hidden"}
-        transition={{ delay: 0.2 }}
-        className={`w-full flex ${isEven ? 'justify-start' : 'justify-end'}`}
-      >
-        <div className={`w-full max-w-md ${isEven ? 'pr-8' : 'pl-8'} py-8`}>
-          <div className={`bg-white rounded-xl shadow-lg p-6 border border-gray-100 ${
-            !isEven ? 'text-right' : ''
-          }`}>
-            <div className="flex items-center gap-2 text-blue-600 mb-2">
-              <Calendar className="w-4 h-4" />
-              <span className="text-sm font-medium">{item.period}</span>
-            </div>
-            
-            <h3 className="text-xl font-semibold text-gray-900 mb-1">
-              {item.title}
-            </h3>
-            
-            <p className="text-gray-600 font-medium mb-4">
-              {item.company}
-            </p>
-
-            <ul className={`space-y-2 ${!isEven ? 'text-right' : ''}`}>
-              {item.achievements.map((achievement, achievementIndex) => (
-                <motion.li
-                  key={achievementIndex}
-                  initial={{ opacity: 0, x: isEven ? -20 : 20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: isEven ? -20 : 20 }}
-                  transition={{ delay: 0.3 + achievementIndex * 0.1 }}
-                  className="text-sm text-gray-600 flex items-start gap-2"
-                >
-                  {isEven && <div className="w-2 h-2 bg-blue-400 rounded-full mt-1.5 flex-shrink-0" />}
-                  <span className="flex-1">{achievement}</span>
-                  {!isEven && <div className="w-2 h-2 bg-blue-400 rounded-full mt-1.5 flex-shrink-0" />}
-                </motion.li>
-              ))}
-            </ul>
+        {/* Content */}
+        <motion.div
+          variants={timelineItem}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          transition={{ delay: 0.2 }}
+          className="flex-1 bg-white rounded-xl shadow-lg p-6 border border-gray-100"
+        >
+          <div className="flex items-center gap-2 text-blue-600 mb-2">
+            <Calendar className="w-4 h-4" />
+            <span className="text-sm font-medium">{item.period}</span>
           </div>
-        </div>
-      </motion.div>
+          
+          <h3 className="text-xl font-semibold text-gray-900 mb-1">
+            {item.title}
+          </h3>
+          
+          <p className="text-gray-600 font-medium mb-4">
+            {item.company}
+          </p>
+
+          <ul className="space-y-2">
+            {item.achievements.map((achievement, achievementIndex) => (
+              <motion.li
+                key={achievementIndex}
+                initial={{ opacity: 0, x: -20 }}
+                animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
+                transition={{ delay: 0.3 + achievementIndex * 0.1 }}
+                className="text-sm text-gray-600 flex items-start gap-2"
+              >
+                <div className="w-2 h-2 bg-blue-400 rounded-full mt-1.5 flex-shrink-0" />
+                <span className="flex-1">{achievement}</span>
+              </motion.li>
+            ))}
+          </ul>
+        </motion.div>
+      </div>
+
+      {/* Desktop Layout */}
+      <div className="hidden md:block">
+        {/* Timeline Node */}
+        <motion.div
+          variants={timelineItem}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="absolute left-1/2 top-8 transform -translate-x-full -ml-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center shadow-lg z-10"
+        >
+          <Briefcase className="w-6 h-6 text-white" />
+        </motion.div>
+
+        {/* Content - Alternating sides */}
+        <motion.div
+          variants={timelineItem}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          transition={{ delay: 0.2 }}
+          className={`flex ${index % 2 === 0 ? 'justify-start' : 'justify-end'}`}
+        >
+          <div className={`w-full max-w-md py-8 ${index % 2 === 0 ? 'pr-16' : 'pl-16'}`}>
+            <div className={`bg-white rounded-xl shadow-lg p-6 border border-gray-100 ${
+              index % 2 !== 0 ? 'text-right' : ''
+            }`}>
+              <div className={`flex items-center gap-2 text-blue-600 mb-2 ${
+                index % 2 !== 0 ? 'justify-end' : ''
+              }`}>
+                <Calendar className="w-4 h-4" />
+                <span className="text-sm font-medium">{item.period}</span>
+              </div>
+              
+              <h3 className="text-xl font-semibold text-gray-900 mb-1">
+                {item.title}
+              </h3>
+              
+              <p className="text-gray-600 font-medium mb-4">
+                {item.company}
+              </p>
+
+              <ul className={`space-y-2`}>
+                {item.achievements.map((achievement, achievementIndex) => (
+                  <motion.li
+                    key={achievementIndex}
+                    initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                    animate={inView ? { opacity: 1, x: 0 } : { opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                    transition={{ delay: 0.3 + achievementIndex * 0.1 }}
+                    className="text-sm text-gray-600 flex items-start gap-2"
+                  >
+                    {index % 2 === 0 && <div className="w-2 h-2 bg-blue-400 rounded-full mt-1.5 flex-shrink-0" />}
+                    <span className="flex-1">{achievement}</span>
+                    {index % 2 !== 0 && <div className="w-2 h-2 bg-blue-400 rounded-full mt-1.5 flex-shrink-0" />}
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </div>
   );
 };
@@ -108,7 +163,12 @@ const Timeline: React.FC<TimelineProps> = ({ data }) => {
           {/* Timeline */}
           <div className="relative space-y-0">
             {data.map((item, index) => (
-              <TimelineItem key={item.id} item={item} index={index} />
+              <TimelineItem 
+                key={item.id} 
+                item={item} 
+                index={index} 
+                isLast={index === data.length - 1}
+              />
             ))}
           </div>
         </motion.div>
