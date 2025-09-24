@@ -4,22 +4,36 @@ import { useInView } from 'react-intersection-observer';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { Send, Copy, CheckCircle, Mail, Phone, MapPin } from 'lucide-react';
+import { Send, Copy, CheckCircle, Mail, Phone, MapPin, AlertCircle } from 'lucide-react';
 import Button from '../ui/Button';
 import { useToast } from '../../hooks/useToast';
 import { fadeInUp, fadeInLeft, fadeInRight, staggerContainer } from '../../utils/animations';
 import { ContactForm } from '../../types/portfolio';
 import { PersonalInfo } from '../../types/portfolio';
+import { EmailService, RateLimiter } from '../../services/emailService';
+import { EMAIL_VALIDATION } from '../../config/email';
 
 interface ContactProps {
   data: PersonalInfo;
 }
 
 const contactSchema = yup.object().shape({
-  name: yup.string().required('Name is required').min(2, 'Name must be at least 2 characters'),
-  email: yup.string().required('Email is required').email('Please enter a valid email'),
-  subject: yup.string().required('Subject is required').min(5, 'Subject must be at least 5 characters'),
-  message: yup.string().required('Message is required').min(10, 'Message must be at least 10 characters'),
+  name: yup.string()
+    .required('Name is required')
+    .min(EMAIL_VALIDATION.MIN_NAME_LENGTH, `Name must be at least ${EMAIL_VALIDATION.MIN_NAME_LENGTH} characters`)
+    .max(EMAIL_VALIDATION.MAX_NAME_LENGTH, `Name must be less than ${EMAIL_VALIDATION.MAX_NAME_LENGTH} characters`),
+  email: yup.string()
+    .required('Email is required')
+    .email('Please enter a valid email address')
+    .max(254, 'Email address is too long'),
+  subject: yup.string()
+    .required('Subject is required')
+    .min(EMAIL_VALIDATION.MIN_SUBJECT_LENGTH, `Subject must be at least ${EMAIL_VALIDATION.MIN_SUBJECT_LENGTH} characters`)
+    .max(EMAIL_VALIDATION.MAX_SUBJECT_LENGTH, `Subject must be less than ${EMAIL_VALIDATION.MAX_SUBJECT_LENGTH} characters`),
+  message: yup.string()
+    .required('Message is required')
+    .min(EMAIL_VALIDATION.MIN_MESSAGE_LENGTH, `Message must be at least ${EMAIL_VALIDATION.MIN_MESSAGE_LENGTH} characters`)
+    .max(EMAIL_VALIDATION.MAX_MESSAGE_LENGTH, `Message must be less than ${EMAIL_VALIDATION.MAX_MESSAGE_LENGTH} characters`),
   honeypot: yup.string().notRequired().max(0, 'Bot detected'), // Spam protection - optional
 });
 
@@ -32,6 +46,7 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
   const { showToast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [emailCopied, setEmailCopied] = useState(false);
+  const [rateLimitInfo, setRateLimitInfo] = useState(() => RateLimiter.checkRateLimit());
 
   const {
     register,
@@ -60,16 +75,38 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
       return;
     }
 
+    // ⚠️ TEMPORARILY DISABLED RATE LIMITING FOR DEBUGGING
+    // TO RE-ENABLE: Uncomment the lines below and remove the comment
+    /*
+    // Check rate limiting before submission
+    const currentRateLimit = RateLimiter.checkRateLimit();
+    if (!currentRateLimit.canSend) {
+      const minutesLeft = Math.ceil((currentRateLimit.timeUntilReset || 0) / 60000);
+      showToast('error', `Too many attempts. Please wait ${minutesLeft} minutes before trying again.`);
+      setRateLimitInfo(currentRateLimit);
+      return;
+    }
+    */
+
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission (replace with actual endpoint)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const result = await EmailService.sendEmail(formData);
       
-      showToast('success', 'Message sent successfully! I\'ll get back to you soon.');
-      reset();
+      if (result.success) {
+        showToast('success', result.message);
+        reset();
+        // Reset rate limit display on successful send
+        setRateLimitInfo(RateLimiter.checkRateLimit());
+      } else {
+        showToast('error', result.message);
+        // Update rate limit info after failed attempt
+        setRateLimitInfo(RateLimiter.checkRateLimit());
+      }
     } catch (error) {
-      showToast('error', 'Failed to send message. Please try again.');
+      console.error('Contact form error:', error);
+      showToast('error', 'An unexpected error occurred. Please try again or contact me directly.');
+      setRateLimitInfo(RateLimiter.checkRateLimit());
     } finally {
       setIsSubmitting(false);
     }
@@ -242,12 +279,30 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
                   )}
                 </div>
 
+                {/* Rate Limit Warning - TEMPORARILY HIDDEN FOR DEBUGGING */}
+                {/* TO RE-ENABLE: Remove this comment block and uncomment the JSX below */}
+                {/*
+                {!rateLimitInfo.canSend && (
+                  <div className="p-4 bg-red-900 bg-opacity-50 rounded-lg border border-red-700 flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <div className="text-red-300 font-medium mb-1">Too Many Attempts</div>
+                      <p className="text-red-200 text-sm">
+                        Please wait {Math.ceil((rateLimitInfo.timeUntilReset || 0) / 60000)} minutes before trying again.
+                        You can also contact me directly via email or phone.
+                      </p>
+                    </div>
+                  </div>
+                )}
+                */}
+
                 {/* Submit Button */}
                 <Button
                   type="submit"
                   variant="primary"
                   size="lg"
                   loading={isSubmitting}
+                  // disabled={!rateLimitInfo.canSend} // TEMPORARILY DISABLED FOR DEBUGGING
                   leftIcon={<Send className="w-5 h-5" />}
                   className="w-full"
                 >
