@@ -75,9 +75,6 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
       return;
     }
 
-    // ⚠️ TEMPORARILY DISABLED RATE LIMITING FOR DEBUGGING
-    // TO RE-ENABLE: Uncomment the lines below and remove the comment
-    /*
     // Check rate limiting before submission
     const currentRateLimit = RateLimiter.checkRateLimit();
     if (!currentRateLimit.canSend) {
@@ -86,7 +83,6 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
       setRateLimitInfo(currentRateLimit);
       return;
     }
-    */
 
     setIsSubmitting(true);
 
@@ -279,9 +275,7 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
                   )}
                 </div>
 
-                {/* Rate Limit Warning - TEMPORARILY HIDDEN FOR DEBUGGING */}
-                {/* TO RE-ENABLE: Remove this comment block and uncomment the JSX below */}
-                {/*
+                {/* Rate Limit Warning */}
                 {!rateLimitInfo.canSend && (
                   <div className="p-4 bg-red-900 bg-opacity-50 rounded-lg border border-red-700 flex items-start gap-3">
                     <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
@@ -294,7 +288,6 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
                     </div>
                   </div>
                 )}
-                */}
 
                 {/* Submit Button */}
                 <Button
@@ -302,7 +295,7 @@ const Contact: React.FC<ContactProps> = ({ data }) => {
                   variant="primary"
                   size="lg"
                   loading={isSubmitting}
-                  // disabled={!rateLimitInfo.canSend} // TEMPORARILY DISABLED FOR DEBUGGING
+                  disabled={!rateLimitInfo.canSend}
                   leftIcon={<Send className="w-5 h-5" />}
                   className="w-full"
                 >

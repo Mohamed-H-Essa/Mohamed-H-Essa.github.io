@@ -127,9 +127,6 @@ export class EmailService {
    */
   static async sendEmail(formData: ContactForm): Promise<EmailResponse> {
     try {
-      // ⚠️ TEMPORARILY DISABLED RATE LIMITING FOR DEBUGGING
-      // TO RE-ENABLE: Uncomment the lines below and remove the comment
-      /*
       // Check rate limiting
       const rateLimitInfo = RateLimiter.checkRateLimit();
       if (!rateLimitInfo.canSend) {
@@ -140,7 +137,6 @@ export class EmailService {
           status: 429,
         };
       }
-      */
 
       // Validate form data
       const validationErrors = EmailValidator.validateForm(formData);
@@ -162,9 +158,8 @@ export class EmailService {
         [EMAIL_TEMPLATE_VARS.TO_EMAIL]: 'me@mecodes.live', // Your email
       };
 
-      // ⚠️ TEMPORARILY DISABLED - Record attempt for rate limiting
-      // TO RE-ENABLE: Uncomment the line below
-      // RateLimiter.recordAttempt();
+      // Record attempt for rate limiting
+      RateLimiter.recordAttempt();
 
       // Send email
       const response = await emailjs.send(
