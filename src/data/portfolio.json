@@ -121,8 +121,8 @@
     },
     {
       "id": 2,
-      "title": "EcoTracker Sustainability Platform",
-      "description": "Mobile platform helping users track their carbon footprint with gamification and community features.",
+      "title": "Aratc",
+      "description": "Educational platform designed specifically for Iraqi educators, providing digital tools and resources to enhance teaching methodologies and student engagement.",
       "image": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg",
       "tags": ["Flutter", "AWS", "GraphQL", "Gamification"],
       "role": "Flutter Developer",
