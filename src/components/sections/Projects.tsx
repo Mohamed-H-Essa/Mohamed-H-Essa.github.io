@@ -98,7 +98,7 @@ const Projects: React.FC<ProjectsProps> = ({ data }) => {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full h-48 object-cover"
+                      className="w-full h-48 object-cover rounded-t-lg"
                       loading="lazy"
                     />
                     {project.featured && (

@@ -1,8 +1,6 @@
-import React from 'react';
-import { motion, MotionProps } from 'framer-motion';
-import { parallaxCard } from '../../utils/animations';
+import React from "react";
 
-interface CardProps extends MotionProps {
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
   hoverable?: boolean;
@@ -10,30 +8,22 @@ interface CardProps extends MotionProps {
 
 const Card: React.FC<CardProps> = ({
   children,
-  className = '',
+  className = "",
   hoverable = false,
-  ...motionProps
+  ...props
 }) => {
-  const baseStyles = `
-    bg-white rounded-xl shadow-md border border-gray-100
-    transition-all duration-300 overflow-hidden
-  `;
-
-  const hoverStyles = hoverable ? `
-    hover:shadow-xl hover:border-gray-200
-    cursor-pointer
-  ` : '';
+  const baseStyles = "bg-card-bg border border-card-border rounded-lg shadow-sm";
+  const hoverStyles = hoverable
+    ? "transition-all duration-300 ease-in-out hover:shadow-lg hover:-translate-y-1"
+    : "";
 
   return (
-    <motion.div
-      variants={hoverable ? parallaxCard : undefined}
-      initial={hoverable ? "rest" : undefined}
-      whileHover={hoverable ? "hover" : undefined}
+    <div
       className={`${baseStyles} ${hoverStyles} ${className}`}
-      {...motionProps}
+      {...props}
     >
       {children}
-    </motion.div>
+    </div>
   );
 };
 
