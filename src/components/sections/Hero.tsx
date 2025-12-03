@@ -166,7 +166,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
               variant="primary"
               size="lg"
               leftIcon={<Download className="w-5 h-5" />}
-              onClick={() => window.open('/resume.pdf', '_blank')}
+              onClick={() => window.open('/documents/resume.pdf', '_blank')}
             >
               Download Resume
             </Button>
