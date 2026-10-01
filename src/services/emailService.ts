@@ -155,7 +155,7 @@ export class EmailService {
         [EMAIL_TEMPLATE_VARS.SUBJECT]: EmailValidator.sanitizeInput(formData.subject),
         [EMAIL_TEMPLATE_VARS.MESSAGE]: EmailValidator.sanitizeInput(formData.message),
         [EMAIL_TEMPLATE_VARS.REPLY_TO]: formData.email,
-        [EMAIL_TEMPLATE_VARS.TO_EMAIL]: 'me@mecodes.live', // Your email
+        [EMAIL_TEMPLATE_VARS.TO_EMAIL]: 'mhosnytech@gmail.com', // Your email
       };
 
       // Record attempt for rate limiting

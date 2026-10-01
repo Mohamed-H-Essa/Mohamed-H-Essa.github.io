@@ -34,7 +34,7 @@ In your EmailJS template, use these variables:
     <hr>
     <p><strong>Reply to:</strong> {{reply_to}}</p>
     <p><strong>Sent to:</strong> {{to_email}}</p>
-    <p><small>Sent from mecodes.live portfolio</small></p>
+    <p><small>Sent from portfolio contact form</small></p>
 </body>
 </html>
 ```

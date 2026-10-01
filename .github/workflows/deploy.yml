@@ -1,54 +1,53 @@
-name: Deploy to EC2
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
-      
+      uses: actions/checkout@v4
+
     - name: Setup Node.js
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '20'
         cache: 'npm'
-        
+
     - name: Install dependencies
       run: npm ci
-      
+
     - name: Build application
       run: npm run build
-      
-    - name: Deploy to server
-      uses: appleboy/ssh-action@v0.1.5
+
+    - name: Add SPA fallback
+      run: cp dist/index.html dist/404.html
+
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
       with:
-        host: mecodes.live
-        username: ubuntu
-        key: ${{ secrets.EC2_SSH_KEY }}
-        script: |
-          # Navigate to deployment directory
-          cd /var/www/mecodes.live
-          
-          # Pull latest code
-          if [ ! -d ".git" ]; then
-            git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git .
-          else
-            git fetch origin
-            git reset --hard origin/main
-          fi
-          
-          # Install dependencies and build
-          npm ci
-          npm run build
-          
-          # Copy build files to web directory
-          sudo rm -rf /var/www/mecodes.live/public_html/*
-          sudo mkdir -p /var/www/mecodes.live/public_html
-          sudo cp -r dist/* /var/www/mecodes.live/public_html/
-          sudo chown -R www-data:www-data /var/www/mecodes.live/public_html
-          sudo chmod -R 755 /var/www/mecodes.live/public_html
+        path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
